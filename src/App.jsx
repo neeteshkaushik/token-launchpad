@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import TokenLaunchPad from "./components/TokenLaunchPad";
 import MyTokens from "./components/MyTokens";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Airdrop from "./components/Airdrop";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<TokenLaunchPad />} />
                 <Route path="/myTokens" element={<MyTokens />} />
+                <Route path="/airdrop" element={<Airdrop />} />
               </Routes>
             </Router>
           </div>

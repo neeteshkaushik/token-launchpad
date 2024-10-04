@@ -28,9 +28,14 @@ const Header = () => {
               Home
             </Link>
             {connected && (
-              <Link to="/myTokens" className="text-gray-300 hover:text-white transition duration-300 text-sm sm:text-base">
-                My Tokens
-              </Link>
+              <>
+                <Link to="/myTokens" className="text-gray-300 hover:text-white transition duration-300 text-sm sm:text-base">
+                  My Tokens
+                </Link>
+                <Link to="/airdrop" className="text-gray-300 hover:text-white transition duration-300 text-sm sm:text-base">
+                  Airdrop
+                </Link>
+              </>
             )}
           </div>
           <div className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-0">Token Launchpad</div>
