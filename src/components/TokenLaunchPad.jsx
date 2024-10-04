@@ -160,84 +160,106 @@ const TokenLaunchPad = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-start pt-16 px-4">
-      <div className="w-full max-w-md bg-gray-800 shadow-lg rounded-lg p-8">
-        <h2 className="text-2xl font-bold mb-6 text-center text-white">Launch Your Token</h2>
-        <div className="space-y-4">
-          <input
-            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-            value={name}
-            type="text"
-            placeholder="Token Name"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-            value={symbol}
-            type="text"
-            placeholder="Token Symbol"
-            onChange={(e) => setSymbol(e.target.value)}
-          />
-          <input
-            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-            value={supply}
-            type="number"
-            placeholder="Token Supply"
-            onChange={(e) => setSupply(e.target.value)}
-          />
-          <input
-            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-            value={decimals}
-            type="number"
-            placeholder="Token Decimals (max 9)"
-            onChange={(e) => {
-              if (Number(e.target.value) > 9) {
-                notification.error({
-                  message: "Decimals should be less than 9",
-                  placement: "bottomRight",
-                  duration: 2,
-                });
-                return;
-              }
-              setDecimals(e.target.value);
-            }}
-          />
-          <div className="flex items-center justify-center">
-            <label htmlFor="file-upload" className="cursor-pointer">
-              {selectedFile ? (
-                <img
-                  className="h-16 w-16 object-cover rounded-md"
-                  src={URL.createObjectURL(selectedFile)}
-                  alt="Preview"
-                />
-              ) : (
-                <div className="bg-gray-700 text-gray-300 rounded-md px-4 py-2 hover:bg-gray-600 transition duration-300">
-                  Upload Image
-                </div>
-              )}
-            </label>
+    <div className="min-h-screen flex justify-center items-start pt-16 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl bg-gray-800 shadow-lg rounded-lg p-6 sm:p-8 lg:flex lg:gap-8">
+        {/* Token Creation Form */}
+        <div className="lg:w-1/2">
+          <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center text-white">Launch Your Token</h2>
+          <div className="space-y-4">
             <input
-              id="file-upload"
-              className="hidden"
-              type="file"
-              onChange={handleFileChange}
+              className="w-full px-3 py-2 sm:px-4 sm:py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-sm sm:text-base"
+              value={name}
+              type="text"
+              placeholder="Token Name"
+              onChange={(e) => setName(e.target.value)}
             />
+            <input
+              className="w-full px-3 py-2 sm:px-4 sm:py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-sm sm:text-base"
+              value={symbol}
+              type="text"
+              placeholder="Token Symbol"
+              onChange={(e) => setSymbol(e.target.value)}
+            />
+            <input
+              className="w-full px-3 py-2 sm:px-4 sm:py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-sm sm:text-base"
+              value={supply}
+              type="number"
+              placeholder="Token Supply"
+              onChange={(e) => setSupply(e.target.value)}
+            />
+            <input
+              className="w-full px-3 py-2 sm:px-4 sm:py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-sm sm:text-base"
+              value={decimals}
+              type="number"
+              placeholder="Token Decimals (max 9)"
+              onChange={(e) => {
+                if (Number(e.target.value) > 9) {
+                  notification.error({
+                    message: "Decimals should be less than 9",
+                    placement: "bottomRight",
+                    duration: 2,
+                  });
+                  return;
+                }
+                setDecimals(e.target.value);
+              }}
+            />
+            <div className="flex items-center justify-center">
+              <label htmlFor="file-upload" className="cursor-pointer">
+                {selectedFile ? (
+                  <img
+                    className="h-16 w-16 object-cover rounded-md"
+                    src={URL.createObjectURL(selectedFile)}
+                    alt="Preview"
+                  />
+                ) : (
+                  <div className="bg-gray-700 text-gray-300 rounded-md px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base hover:bg-gray-600 transition duration-300">
+                    Upload Image
+                  </div>
+                )}
+              </label>
+              <input
+                id="file-upload"
+                className="hidden"
+                type="file"
+                onChange={handleFileChange}
+              />
+            </div>
+            <button
+              onClick={launchToken}
+              className={`w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 text-sm sm:text-base ${
+                !connected || loading ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+              disabled={!connected || loading}
+            >
+              {loading ? 'Launching...' : 'Launch Token'}
+            </button>
           </div>
-          <button
-            onClick={launchToken}
-            className={`w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 ${
-              !connected || loading ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
-            disabled={!connected || loading}
-          >
-            {loading ? 'Launching...' : 'Launch Token'}
-          </button>
+          {loading && (
+            <div className="mt-4 flex justify-center">
+              <Spin />
+            </div>
+          )}
         </div>
-        {loading && (
-          <div className="mt-4 flex justify-center">
-            <Spin />
+
+        {/* Additional Information or Features */}
+        <div className="lg:w-1/2 mt-8 lg:mt-0">
+          <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center text-white">Token Launchpad Features</h2>
+          <div className="space-y-4 text-gray-300">
+            <div className="bg-gray-700 p-4 rounded-md">
+              <h3 className="text-lg font-semibold mb-2">Create Custom Tokens</h3>
+              <p>Launch your own token on the Solana blockchain with ease. Customize name, symbol, supply, and more.</p>
+            </div>
+            <div className="bg-gray-700 p-4 rounded-md">
+              <h3 className="text-lg font-semibold mb-2">Manage Your Tokens</h3>
+              <p>Keep track of all your created tokens in one place. View balances, transfer tokens, and more.</p>
+            </div>
+            <div className="bg-gray-700 p-4 rounded-md">
+              <h3 className="text-lg font-semibold mb-2">Secure and Fast</h3>
+              <p>Benefit from Solana's high-speed and low-cost transactions. Your tokens are secured by blockchain technology.</p>
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

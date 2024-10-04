@@ -22,16 +22,16 @@ const TokenCard = ({
   }
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-800">
-      <div className="px-6 py-4">
+      <div className="px-4 sm:px-6 py-4">
         <div className="flex items-center mb-4">
           <img
-            className="w-16 h-16 rounded-full mr-4"
+            className="w-12 h-12 sm:w-16 sm:h-16 rounded-full mr-3 sm:mr-4"
             src={imageUrl}
             alt={tokenName}
           />
-          <div className="font-bold text-xl text-white">{tokenName}</div>
+          <div className="font-bold text-lg sm:text-xl text-white">{tokenName}</div>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 text-sm sm:text-base">
           <p className="text-gray-300">
             <span className="font-semibold">Symbol: </span>
             <span className="text-gray-400">{tokenSymbol}</span>

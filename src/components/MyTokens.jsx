@@ -60,20 +60,20 @@ const MyTokens = () => {
   }, [connected]);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center text-white">My Tokens</h1>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-white">My Tokens</h1>
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-16 w-16 sm:h-32 sm:w-32 border-t-2 border-b-2 border-blue-500"></div>
         </div>
       ) : tokens.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {tokens.map((token, index) => (
             <TokenCard key={index} {...token} />
           ))}
         </div>
       ) : (
-        <p className="text-center text-gray-400">No tokens found.</p>
+        <p className="text-center text-gray-400 text-sm sm:text-base">No tokens found.</p>
       )}
     </div>
   );
