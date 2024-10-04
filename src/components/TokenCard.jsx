@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, message } from "antd";
+import { message } from "antd";
 import { CopyOutlined } from "@ant-design/icons";
 
 const TokenCard = ({
@@ -21,61 +21,46 @@ const TokenCard = ({
     )}`;
   }
   return (
-    <div className="card">
-      <div className="card-body">
-        <Card
-          extra={
-            <img
-              src={imageUrl}
-              style={{
-                borderRadius: "6px",
-                maxWidth: "64px",
-                maxHeight: "64px",
-              }}
-              alt="..."
-            />
-          }
-          title={tokenName}
-        >
-          <p>
-            <span style={{ fontWeight: "bolder" }}>Symbol: </span>{" "}
-            <span style={{ color: "gray", fontWeight: "bold" }}>
-              {tokenSymbol}
+    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-800">
+      <div className="px-6 py-4">
+        <div className="flex items-center mb-4">
+          <img
+            className="w-16 h-16 rounded-full mr-4"
+            src={imageUrl}
+            alt={tokenName}
+          />
+          <div className="font-bold text-xl text-white">{tokenName}</div>
+        </div>
+        <div className="space-y-2">
+          <p className="text-gray-300">
+            <span className="font-semibold">Symbol: </span>
+            <span className="text-gray-400">{tokenSymbol}</span>
+          </p>
+          <p className="text-gray-300">
+            <span className="font-semibold">Mint Address: </span>
+            <span className="text-gray-400">
+              {truncateAddress(mintAddress)}
+              <CopyOutlined
+                className="ml-2 cursor-pointer text-blue-400 hover:text-blue-300"
+                onClick={() => copyToClipBoard(mintAddress)}
+              />
             </span>
           </p>
-          <p>
-            <span style={{ fontWeight: "bolder" }}>Mint Address: </span>{" "}
-            <span style={{ color: "gray", fontWeight: "bold" }}>
-              {truncateAddress(mintAddress)}{" "}
-              <CopyOutlined
-                onClick={() => {
-                  copyToClipBoard(mintAddress);
-                }}
-              />
-            </span>{" "}
-          </p>
-          <p>
-            {" "}
-            <span style={{ fontWeight: "bolder" }}>
-              Token Account Address:{" "}
-            </span>{" "}
-            <span style={{ color: "gray", fontWeight: "bold" }}>
+          <p className="text-gray-300">
+            <span className="font-semibold">Token Account Address: </span>
+            <span className="text-gray-400">
               {truncateAddress(tokenAccountAddress)}
               <CopyOutlined
-                onClick={() => {
-                  copyToClipBoard(tokenAccountAddress);
-                }}
+                className="ml-2 cursor-pointer text-blue-400 hover:text-blue-300"
+                onClick={() => copyToClipBoard(tokenAccountAddress)}
               />
-            </span>{" "}
+            </span>
           </p>
-          <p>
-            {" "}
-            <span style={{ fontWeight: "bolder" }}>Token Amount: </span>{" "}
-            <span style={{ color: "gray", fontWeight: "bold" }}>
-              {tokenAmount}
-            </span>{" "}
+          <p className="text-gray-300">
+            <span className="font-semibold">Token Amount: </span>
+            <span className="text-gray-400">{tokenAmount}</span>
           </p>
-        </Card>
+        </div>
       </div>
     </div>
   );

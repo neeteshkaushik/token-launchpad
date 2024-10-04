@@ -82,7 +82,6 @@ const TokenLaunchPad = () => {
       const lamports = await connection.getMinimumBalanceForRentExemption(
         mintLen + metadataLen
       );
-
       const transaction = new Transaction().add(
         SystemProgram.createAccount({
           fromPubkey: wallet.publicKey,
@@ -130,7 +129,6 @@ const TokenLaunchPad = () => {
           TOKEN_2022_PROGRAM_ID
         )
       );
-
       transaction.feePayer = wallet.publicKey;
       transaction.recentBlockhash = (
         await connection.getLatestBlockhash()
@@ -162,116 +160,84 @@ const TokenLaunchPad = () => {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "50vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: "10rem",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          width: "30%",
-          gap: "2rem",
-          flexDirection: "column",
-          height: "100%",
-          justifyContent: "space-evenly",
-          border: "4px solid gray",
-          padding: "2rem",
-          borderRadius: "2rem",
-        }}
-      >
-        <input
-          style={{ padding: "15px", borderRadius: "10px" }}
-          value={name}
-          type="text"
-          placeholder="Token Name"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-        <input
-          style={{ padding: "15px", borderRadius: "10px" }}
-          value={symbol}
-          type="text"
-          placeholder="Token Symbol"
-          onChange={(e) => {
-            setSymbol(e.target.value);
-          }}
-        />
-        <input
-          style={{ padding: "15px", borderRadius: "10px" }}
-          value={supply}
-          type="number"
-          placeholder="Token Supply"
-          onChange={(e) => {
-            setSupply(e.target.value);
-          }}
-        />
-        <input
-          style={{ padding: "15px", borderRadius: "10px" }}
-          value={decimals}
-          type="number"
-          placeholder="Token Decimals (max 9)"
-          onChange={(e) => {
-            if (Number(e.target.value) > 9) {
-              notification.error({
-                message: "Decimals should be less than 9",
-                placement: "bottomRight",
-                duration: 2,
-              });
-              return;
-            }
-            setDecimals(e.target.value);
-          }}
-        />
-        <label htmlFor="file-upload">
-          {selectedFile ? (
-            <img
-              style={{
-                maxHeight: "64px",
-                maxWidth: "64px",
-                borderRadius: "6px",
-              }}
-              src={URL.createObjectURL(selectedFile)}
-              alt="Preview"
+    <div className="min-h-screen flex justify-center items-start pt-16 px-4">
+      <div className="w-full max-w-md bg-gray-800 shadow-lg rounded-lg p-8">
+        <h2 className="text-2xl font-bold mb-6 text-center text-white">Launch Your Token</h2>
+        <div className="space-y-4">
+          <input
+            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+            value={name}
+            type="text"
+            placeholder="Token Name"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+            value={symbol}
+            type="text"
+            placeholder="Token Symbol"
+            onChange={(e) => setSymbol(e.target.value)}
+          />
+          <input
+            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+            value={supply}
+            type="number"
+            placeholder="Token Supply"
+            onChange={(e) => setSupply(e.target.value)}
+          />
+          <input
+            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+            value={decimals}
+            type="number"
+            placeholder="Token Decimals (max 9)"
+            onChange={(e) => {
+              if (Number(e.target.value) > 9) {
+                notification.error({
+                  message: "Decimals should be less than 9",
+                  placement: "bottomRight",
+                  duration: 2,
+                });
+                return;
+              }
+              setDecimals(e.target.value);
+            }}
+          />
+          <div className="flex items-center justify-center">
+            <label htmlFor="file-upload" className="cursor-pointer">
+              {selectedFile ? (
+                <img
+                  className="h-16 w-16 object-cover rounded-md"
+                  src={URL.createObjectURL(selectedFile)}
+                  alt="Preview"
+                />
+              ) : (
+                <div className="bg-gray-700 text-gray-300 rounded-md px-4 py-2 hover:bg-gray-600 transition duration-300">
+                  Upload Image
+                </div>
+              )}
+            </label>
+            <input
+              id="file-upload"
+              className="hidden"
+              type="file"
+              onChange={handleFileChange}
             />
-          ) : (
-            <div
-              style={{
-                backgroundColor: "#808080",
-                borderRadius: "10px",
-                padding: "15px",
-                width: "124px",
-              }}
-            >
-              Upload Image
-            </div>
-          )}
-        </label>
-        <input
-          id="file-upload"
-          style={{ display: "none" }}
-          type="file"
-          onChange={(e) => {
-            handleFileChange(e);
-          }}
-        />
-        <button
-          onClick={launchToken}
-          style={{
-            padding: "20px",
-            borderRadius: "10px",
-            display: loading ? "none" : "block",
-          }}
-          disabled={!connected}
-        >
-          Launch Token
-        </button>
-        <Spin spinning={loading} />
+          </div>
+          <button
+            onClick={launchToken}
+            className={`w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 ${
+              !connected || loading ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            disabled={!connected || loading}
+          >
+            {loading ? 'Launching...' : 'Launch Token'}
+          </button>
+        </div>
+        {loading && (
+          <div className="mt-4 flex justify-center">
+            <Spin />
+          </div>
+        )}
       </div>
     </div>
   );

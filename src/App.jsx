@@ -15,6 +15,7 @@ function App() {
     <ConnectionProvider endpoint="https://api.devnet.solana.com">
       <WalletProvider wallets={[]} autoConnect>
         <WalletModalProvider>
+          <div className="min-h-screen bg-gray-900 text-white">
             <Router>
               <Header />
               <Routes>
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/myTokens" element={<MyTokens />} />
               </Routes>
             </Router>
+          </div>
         </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
