@@ -160,8 +160,8 @@ const TokenLaunchPad = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-start pt-16 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-7xl bg-gray-800 shadow-lg rounded-lg p-6 sm:p-8 lg:flex lg:gap-8">
+    <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="bg-gray-800 shadow-lg rounded-lg p-6 sm:p-8 lg:flex lg:gap-8">
         {/* Token Creation Form */}
         <div className="lg:w-1/2">
           <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center text-white">Launch Your Token</h2>

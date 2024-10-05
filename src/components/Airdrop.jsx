@@ -62,7 +62,7 @@ const Airdrop = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-start pt-16 px-4 sm:px-6 lg:px-8">
+    <div className="flex justify-center items-start pt-16 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md bg-gray-800 shadow-lg rounded-lg p-6 sm:p-8">
         <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center text-white">Request SOL Airdrop</h2>
         <div className="space-y-4">
