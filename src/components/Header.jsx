@@ -29,12 +29,22 @@ const Header = () => {
             </Link>
             {connected && (
               <>
+                 <Link to="/create-token" className="text-gray-300 hover:text-white transition duration-300 text-sm sm:text-base">
+                  Create Token
+                </Link>
                 <Link to="/myTokens" className="text-gray-300 hover:text-white transition duration-300 text-sm sm:text-base">
                   My Tokens
                 </Link>
                 <Link to="/airdrop" className="text-gray-300 hover:text-white transition duration-300 text-sm sm:text-base">
                   Airdrop
                 </Link>
+                <Link to="/create-pool" className="text-gray-300 hover:text-white transition duration-300 text-sm sm:text-base">
+                  Create Pool
+                </Link>
+                <Link to="/token-swap" className="text-gray-300 hover:text-white transition duration-300 text-sm sm:text-base">
+                  Token Swap
+                </Link>
+               
               </>
             )}
           </div>

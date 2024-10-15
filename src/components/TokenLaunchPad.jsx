@@ -163,7 +163,7 @@ const TokenLaunchPad = () => {
     <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="bg-gray-800 shadow-lg rounded-lg p-6 sm:p-8 lg:flex lg:gap-8">
         {/* Token Creation Form */}
-        <div className="lg:w-1/2">
+        <div className="lg:w-full">
           <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center text-white">Launch Your Token</h2>
           <div className="space-y-4">
             <input
@@ -184,6 +184,8 @@ const TokenLaunchPad = () => {
               className="w-full px-3 py-2 sm:px-4 sm:py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-sm sm:text-base"
               value={supply}
               type="number"
+              min="0"
+              step="any"
               placeholder="Token Supply"
               onChange={(e) => setSupply(e.target.value)}
             />
@@ -243,7 +245,7 @@ const TokenLaunchPad = () => {
         </div>
 
         {/* Additional Information or Features */}
-        <div className="lg:w-1/2 mt-8 lg:mt-0">
+        {/* <div className="lg:w-1/2 mt-8 lg:mt-0">
           <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center text-white">Token Launchpad Features</h2>
           <div className="space-y-4 text-gray-300">
             <div className="bg-gray-700 p-4 rounded-md">
@@ -258,8 +260,8 @@ const TokenLaunchPad = () => {
               <h3 className="text-lg font-semibold mb-2">Secure and Fast</h3>
               <p>Benefit from Solana's high-speed and low-cost transactions. Your tokens are secured by blockchain technology.</p>
             </div>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </div>
     </div>
   );
